@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="sendTest()">Send Test Data</button>
+<pre id="out"></pre>
+<script>
+function sendTest() {
+  fetch('http://192.168.4.2/EnergyHackathonS2026/solar_receiver.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: 'ldr=3000&p_harvest=350&e_debt=12.5&v_batt=7.2&soc=80&servo_pos=95&servo_dir=1&state=SURPLUS'
+  })
+  .then(r => r.text())
+  .then(d => document.getElementById('out').textContent = d)
+  .catch(e => document.getElementById('out').textContent = 'ERROR: ' + e);
+}
+</script>
+</body>
+</html>
